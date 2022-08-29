@@ -8,25 +8,61 @@ class Node:
 class DoublyCircularLinkedList:
     def __init__(self):
         self.head = None
+        self.end= None
         self.count = 0
 
     def add_at_tail(self, data) -> bool:
         # Write code here
-
+        #Append a node of value data as the last element of the linked list. The function returns True after append operation.
+        temp=Node(data)
+        temp.previous=self.end
+        #if list empty
+        if (temp.end == None):
+            self.head=temp
+            self.tail=temp
+            temp.next =None
+        else:
+            self.temp.next=temp
+            temp.next=None
+            self.tail=temp
+        return True
+    
     def add_at_head(self, data) -> bool:
         # Write code here
+        '''Add a node of value data before the first element of the linked list. 
+        After the insertion, the new node will be the first node of the linked list. 
+        The function returns True after adding data at head.'''
+        temp=Node(data)
+        temp.next=temp.head
+        if self.head != None:
+            self.head.previous=temp
+            self.head=temp
+            temp.previous=None
+        else:
+            self.head=temp
+            self.end=temp
+            temp.previous=None
+        return True
 
     def add_at_index(self, index, data) -> bool:
         # Write code here
+        '''Add a node of value data before the indexth node in the linked list. 
+        If index equals the length of the linked list, the node will be appended to the end of the linked list. 
+        If index is greater than the length, the node will not be inserted. 
+        If the operation is success, the function returns True, otherwise it returns False.'''
 
     def get(self, index) -> int:
         # Write code here
+        #Get the value of the indexth node in the linked list. If the index is invalid, return -1.
+        
 
     def delete_at_index(self, index) -> bool:
         # Write code here
+        #Delete the indexth node in the linked list, if the index is valid. If the operation is success, the function returns True, otherwise it returns False.
 
     def get_previous_next(self, index) -> list:
         # Write code here
+        #Delete the indexth node in the linked list, if the index is valid. If the operation is success, the function returns True, otherwise it returns False.
 
 
 # Do not change the following code
