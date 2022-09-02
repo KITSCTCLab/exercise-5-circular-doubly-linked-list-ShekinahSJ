@@ -8,41 +8,37 @@ class Node:
 class DoublyCircularLinkedList:
     def __init__(self):
         self.head = None
-        self.end= None
         self.count = 0
 
     def add_at_tail(self, data) -> bool:
         # Write code here
-        #Append a node of value data as the last element of the linked list. The function returns True after append operation.
-        temp=Node(data)
-        temp.previous=self.end
-        #if list empty
-        if (temp.end == None):
-            self.head=temp
-            self.tail=temp
-            temp.next =None
-        else:
-            self.temp.next=temp
-            temp.next=None
-            self.tail=temp
+        temp = Node(data)
+        temp.next = self.head
+        temp.previous = self.head.previous
+        self.head.previous = temp
+        temp.previous.next = temp
+        self.count += 1
         return True
-    
+
     def add_at_head(self, data) -> bool:
         # Write code here
-        '''Add a node of value data before the first element of the linked list. 
-        After the insertion, the new node will be the first node of the linked list. 
-        The function returns True after adding data at head.'''
-        temp=Node(data)
-        temp.next=temp.head
-        if self.head != None:
-            self.head.previous=temp
-            self.head=temp
-            temp.previous=None
+        if self.head == None:
+            temp = Node(data)
+            self.head = temp
+            self.head.next = self.head
+            self.head.previous = self.head
+            self.count += 1
+            #print(self.count,"???")
+            return True
         else:
-            self.head=temp
-            self.end=temp
-            temp.previous=None
-        return True
+            temp = Node(data)
+            temp.next = self.head
+            temp.previous = self.head.previous
+            self.head.previous = temp
+            temp.previous.next = temp
+            self.head = temp
+            self.count += 1
+            return True
 
     def add_at_index(self, index, data) -> bool:
         # Write code here
@@ -137,7 +133,6 @@ for specific_operation in input().split(','):
 input_data = input()
 data = []
 iteration_count = 0
-
 for item in input_data.split(', '):
     inner_list = []
     if item.isnumeric():
@@ -148,21 +143,32 @@ for item in input_data.split(', '):
             if letter.isnumeric():
                 inner_list.append(int(letter))
         data.append(inner_list)
-
 obj = DoublyCircularLinkedList()
 result = []
+
+
 for i in range(len(operations)):
+
     if operations[i] == "add_at_head":
-        result.append(obj.add_at_head(data[i]))
+        a=obj.add_at_head(data[i])
+        if a!=None:
+            result.append(a)
+        else:
+            result.append(False)
     elif operations[i] == "add_at_tail":
         result.append(obj.add_at_tail(data[i]))
     elif operations[i] == "add_at_index":
-        result.append(obj.add_at_index(int(data[i][0]), data[i][1]))
+        a=obj.add_at_index(int(data[i][0]), data[i][1])
+        if a!=None:
+            result.append(a)
+        else:
+            result.append(False)
     elif operations[i] == "get":
         result.append(obj.get(data[i]))
     elif operations[i] == "get_previous_next":
         result.append(obj.get_previous_next(data[i]))
     elif operations[i] == 'delete_at_index':
         result.append(obj.delete_at_index(data[i]))
+
 
 print(result)
