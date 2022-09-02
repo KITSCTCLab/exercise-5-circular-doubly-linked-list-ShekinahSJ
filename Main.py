@@ -62,8 +62,23 @@ class DoublyCircularLinkedList:
 
     def get_previous_next(self, index) -> list:
         # Write code here
-        #Delete the indexth node in the linked list, if the index is valid. If the operation is success, the function returns True, otherwise it returns False.
+        if index >= 0 and index < self.count:
+            l = []
+            temp = self.head
+            for i in range(index):
+                temp = temp.next
+            l.append(temp.previous.data)
+            l.append(temp.next.data)
+            return l
+        else:
+            return -1
 
+    def display(self):
+        temp=self.head
+        print(self.count)
+        for i in range (self.count):
+            print(temp.data,"*",i)
+            temp=temp.next
 
 # Do not change the following code
 operations = []
