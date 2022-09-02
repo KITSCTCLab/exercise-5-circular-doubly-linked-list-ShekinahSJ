@@ -58,7 +58,30 @@ class DoublyCircularLinkedList:
 
     def delete_at_index(self, index) -> bool:
         # Write code here
-        #Delete the indexth node in the linked list, if the index is valid. If the operation is success, the function returns True, otherwise it returns False.
+        if index >= 0 and index < self.count:
+            if index == 0:
+                self.head.previous.next = self.head.next
+                self.head.next.previous = self.head.previous
+                self.head = self.head.next
+                self.count -= 1
+                return True
+            elif index == self.count - 1:
+                temp = self.head.previous
+                temp.previous.next = temp.next
+                temp.next.previous = temp.previous
+                self.count -= 1
+                return True
+            else:
+                temp = self.head
+                for i in range(index):
+                    temp = temp.next
+                temp.previous.next = temp.next
+                temp.next.previous = temp.previous
+                self.count -= 1
+                return True
+
+        else:
+            return False
 
     def get_previous_next(self, index) -> list:
         # Write code here
