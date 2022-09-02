@@ -46,15 +46,42 @@ class DoublyCircularLinkedList:
 
     def add_at_index(self, index, data) -> bool:
         # Write code here
-        '''Add a node of value data before the indexth node in the linked list. 
-        If index equals the length of the linked list, the node will be appended to the end of the linked list. 
-        If index is greater than the length, the node will not be inserted. 
-        If the operation is success, the function returns True, otherwise it returns False.'''
+        if index>=0 and index<=self.count:
+            if index == self.count :
+                self.add_at_tail(data)
+                return True
+
+
+
+            elif index == 0:
+                self.add_at_head( data)
+                return True
+            else:
+                a = 0
+                self.count += 1
+                insert_node = Node(data)
+                index_node = self.head
+                while (a < index):
+                    index_node = index_node.next
+                    a += 1
+                insert_node.next = index_node
+                insert_node.previous = index_node.previous
+                insert_node.previous.next = insert_node
+                index_node.previous = insert_node
+                return True
 
     def get(self, index) -> int:
         # Write code here
-        #Get the value of the indexth node in the linked list. If the index is invalid, return -1.
-        
+
+        if index < 0 and index >= self.count:
+            return -1
+        elif  self.head== None:
+            return -1
+        else:
+            temp = self.head
+            for i in range(index):
+                temp = temp.next
+            return temp.data
 
     def delete_at_index(self, index) -> bool:
         # Write code here
